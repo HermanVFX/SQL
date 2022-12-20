@@ -38,3 +38,18 @@ SELECT room_id, AVG(rating)  as avg_score
             ON Reservations.id = Reviews.reservation_id 
     GROUP BY Reservations.room_id 
 ```
+____
+## Ограничение выборки
+
+### 1. Ограничение записей с начала таблицы
+Отсортируйте список компаний (таблица Company) по их названию в алфавитном порядке и выведите первые две записи.
+```SQL
+SELECT * FROM Company
+    ORDER BY name LIMIT 2
+```
+### 2. Ограничение количества записей со смещением
+Выведите начало (поле start_pair) и окончание (поле end_pair) второго и третьего занятия из таблицы Timepair.
+```SQL
+SELECT start_pair, end_pair FROM Timepair 
+    ORDER BY id LIMIT 1, 2
+```
