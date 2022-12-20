@@ -5,7 +5,7 @@ SQL Academy Lessons
 
 ### 1. INNER JOIN
 Объедините таблицы Class и Student_in_class с помощью внутреннего соединения по полям Class.id и Student_in_class.class. Выведите название класса (поле Class.name) и идентификатор ученика (поле Student_in_class.student).
-```
+```SQL
 SELECT Class.name, Student_in_class.student FROM Class
     JOIN Student_in_class ON Student_in_class.class = Class.id 
 ```    
