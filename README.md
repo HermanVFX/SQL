@@ -11,7 +11,7 @@ SELECT Class.name, Student_in_class.student FROM Class
 ```    
 ### 2.Многотабличный INNER JOIN
 Дополните запрос из предыдущего задания, добавив ещё одно внутреннее соединение с таблицей Student. Объедините по полям Student_in_class.student и Student.id и вместо идентификатора ученика выведите его имя (поле first_name).
-```
+```SQL
 SELECT Class.name, first_name
   FROM Class
     JOIN Student_in_class
@@ -21,7 +21,7 @@ SELECT Class.name, first_name
 ```
 ### 3. Многотабличный INNER JOIN с фильтрацией строк
 Выведите названия продуктов, которые покупал член семьи со статусом "son". Для получения выборки вам нужно объединить таблицу Payments с таблицей FamilyMembers по полям family_member и member_id, а также с таблицей Goods по полям good и good_id.
-```
+```SQL
 SELECT good_name FROM Payments
     JOIN FamilyMembers
         ON Payments.family_member = FamilyMembers.member_id 
@@ -31,7 +31,7 @@ SELECT good_name FROM Payments
 ```
 ### 4. INNER JOIN с группировкой
 Выведите идентификатор (поле room_id) и среднюю оценку комнаты (поле rating, для вывода используйте псевдоним avg_score), составленную на основании отзывов из таблицы Reviews.
-```
+```SQL
 SELECT room_id, AVG(rating)  as avg_score
     FROM Reservations
         JOIN Reviews
