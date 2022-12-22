@@ -1,6 +1,36 @@
 # SQL
 SQL Academy Lessons
 
+## Общая структура запроса
+
+### 1. SELECT по одному столбцу
+Выведите поле name из таблицы Passenger.
+```SQL
+SELECT name FROM Passenger
+```
+
+### 2. SELECT по нескольким столбцам
+Выведите поля member_id, member_name и status из таблицы FamilyMembers.
+```SQL
+SELECT member_id, member_name, status FROM FamilyMembers
+```
+
+### 3. SELECT по всем столбцам
+Выведите все столбцы из таблицы Payments.
+```SQL
+SELECT * FROM Payments
+```
+
+### 4. Получение уникальных записей
+Выполните предложенный ниже запрос, чтобы увидеть список пассажиров. Если присмотреться, то можно увидеть, что пассажир с именем Bruce Willis присутствует здесь дважды (в начале и конце списка).
+Ваша задача заключается в том, чтобы вывести только уникальные имена пассажиров, дополнив предложенный запрос.
+```SQL
+SELECT DISTINCT name FROM Passenger
+```
+____
+
+
+
 ## Многотабличные запросы
 
 ### 1. INNER JOIN
