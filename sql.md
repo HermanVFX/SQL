@@ -40,7 +40,8 @@ CREATE TABLE my_database_schema.my_data
     name VARCHAR(128) UNIQUE NOT NULL,
     date DATE                NOT NULL CHECK ( date > '1900-01-01' AND date < '2020-01-01' )
 );
-
+```
+```SQL
 CREATE TABLE my_employee
 (
     id         SERIAL PRIMARY KEY,
