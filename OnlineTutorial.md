@@ -217,7 +217,32 @@ FROM Rooms WHERE id = 11)
 ```
 ____
 ## <a name="Обобщенное_табличное_выражение_оператор_WITH">Обобщенное табличное выражение, оператор WITH</a>
+___
+## <a name="Обобщенное_табличное_выражение_оператор_WITH">Обобщенное табличное выражение, оператор WITH</a>
+### 1. Отчёт по тратам
+Создать отчет затрат семьи Quincey за 3 квартал 2005 года. Отсортировать по возрастанию member_name, затем по убыванию поля costs.
+Последней строкой вывести итог по всей семье. Для этого необходимо под колонкой good_name вывести слово "Total:", а под costs - общую сумму всех затрат, оставив первые два поля пустыми.
+```SQL
+WITH report 
+    AS (
+            SELECT  member_name,
+                    status,
+                    good_name,
+                    amount * unit_price AS costs
+            FROM FamilyMembers
+                JOIN Payments ON Payments.family_member = member_id 
+                JOIN Goods ON Goods.good_id = Payments.good 
+            WHERE member_name LIKE '%Quincey'
+                AND date LIKE "2005-07%" 
+                    OR date LIKE "2005-08%"
+                    OR date LIKE "2005-09%"
+        )
+SELECT * FROM report 
+UNION 
+SELECT NULL, NULL,"Total:",SUM(costs)
+FROM report 
+ORDER BY CASE WHEN member_name IS NULL THEN 1 ELSE 0 END,member_name, costs DESC
 
-
+```
 
 
