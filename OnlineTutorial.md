@@ -265,3 +265,18 @@ SELECT CONCAT(YEAR(now()), "-", MONTH(now()), "-", DAY(now())) AS date;
 ```SQL
 SELECT member_name,YEAR(now()) - YEAR(birthday) AS age FROM FamilyMembers;
 ```
+### 3. Шаблонный вывод даты
+Вывести текущую дату и время в формате "ЧЧ:ММ, ДД.ММ.ГГГГ", где часы и минуты с ведущим нулем, а день и месяц без. Для вывода используйте псевдоним date.
+```SQL
+SELECT CONCAT(
+            HOUR(now()),
+            ":",
+            MINUTE(now()),
+            ", ",
+            DAY(now()),
+            ".",
+            MONTH(now()),
+            ".",
+            YEAR(now())
+            ) AS date;
+```
