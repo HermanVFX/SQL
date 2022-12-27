@@ -189,3 +189,35 @@ SELECT start_pair, end_pair FROM Timepair
 ```
 ____
 ## <a name="Вложенные_SQL_запросы">Вложенные SQL запросы</a>
+
+### 1. Скалярные подзапросы
+Выведите количество полётов каждого пассажира, представленного в таблице Passenger. Список полётов находится в таблице Pass_in_trip.
+В качестве результата выведите количество полётов (используйте псевдоним count) и имя пассажира.
+```SQL
+SELECT  (SELECT COUNT(trip) FROM Pass_in_trip WHERE passenger  = Passenger.id) as count,
+        name
+FROM Passenger
+```
+### 2. Столбцовые подзапросы с выражением IN
+Выведите названия товаров из таблицы Goods (поле good_name), которые ещё ни разу не покупались ни одним из членов семьи (таблица Payments).
+```SQL
+SELECT good_name FROM Goods 
+WHERE good_id NOT IN (SELECT good FROM Payments)
+```
+### 3. Строковые подзапросы
+Выведите список комнат (все поля, таблица Rooms), которые по своим удобствам (has_tv, has_internet, has_kitchen, has_air_con) совпадают с комнатой с идентификатором "11".
+```SQL
+SELECT * FROM Rooms
+WHERE (has_tv, has_internet, has_kitchen, has_air_con) =
+(SELECT has_tv,
+        has_internet,
+        has_kitchen,
+        has_air_con
+FROM Rooms WHERE id = 11)
+```
+____
+## Обобщенное табличное выражение, оператор WITH
+
+
+
+
