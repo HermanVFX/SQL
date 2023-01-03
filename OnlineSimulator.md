@@ -671,9 +671,9 @@ SELECT owner_id,
      SUM(total_earn) AS total_earn
    FROM (
        SELECT room_id,
-         SUM(total) AS total_earn
+          IFNULL(SUM(total), 0) AS total_earn
        FROM Rooms
-         JOIN Reservations ON Reservations.room_id = Rooms.id
+         LEFT JOIN Reservations ON Reservations.room_id = Rooms.id
        GROUP BY room_id
      ) AS asd
      JOIN Rooms ON asd.room_id = Rooms.id
@@ -683,10 +683,39 @@ SELECT owner_id,
 ## Задание 70
 Необходимо категоризовать жилье на economy, comfort, premium по цене соответственно <= 100, 100 < цена < 200, >= 200. В качестве результата вывести таблицу с названием категории и количеством жилья, попадающего в данную категорию
 ```SQL
-
+SELECT 'economy' AS category,
+  COUNT(id) AS count
+FROM Rooms
+WHERE price <= 100
+UNION
+SELECT 'comfort' AS category,
+  COUNT(id) AS count
+FROM Rooms
+WHERE price > 100
+  AND price < 200
+UNION
+SELECT 'premium' AS category,
+  COUNT(id) AS count
+FROM Rooms
+WHERE price >= 200
 ```
 ## Задание 71
 Найдите какой процент пользователей, зарегистрированных на сервисе бронирования, хоть раз арендовали или сдавали в аренду жилье. Результат округлите до сотых.
 ```SQL
-
+WITH res AS (
+  SELECT DISTINCT user_id
+  FROM Reservations
+  UNION
+  SELECT DISTINCT owner_id
+  FROM Rooms
+    JOIN Reservations ON Reservations.room_id = Rooms.id
+)
+SELECT ROUND(
+    (
+      SELECT COUNT(*)
+      FROM res
+    ) / COUNT(id) * 100,
+    2
+  ) AS percent
+FROM Users
 ```
