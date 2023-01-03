@@ -134,3 +134,51 @@ FROM employee
          JOIN company ON company.id = departments.id_company
 ORDER BY company, department;
 ```
+## Практическое задание
+Создать базу данных кник подключиться к базе данных 
+
+```SQL
+CREATE TABLE Autors
+(
+    id SERIAL PRIMARY KEY,
+    f_name VARCHAR(128),
+    l_name VARCHAR(128)
+);
+```
+
+```SQL
+CREATE TABLE Books
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(128),
+    year DATE,
+    count_page INT,
+    id_autor INT REFERENCES Autors (id)
+);
+```
+Заполнить таблицы 
+```SQL
+INSERT INTO Autors (id, f_name, l_name)
+VALUES (DEFAULT, 'Михаил', 'Булгаков'),
+       (DEFAULT, 'Николай', 'Гоголь'),
+       (DEFAULT, 'Александр', 'Дюма'),
+       (DEFAULT, 'Александр', 'Пушкин'),
+       (DEFAULT, 'Антон', 'Чехов');
+```
+
+```SQL
+INSERT INTO Books (id, name, year, count_page, id_autor)
+VALUES (DEFAULT, 'Мастер и Маргарита', 1940, 120, 1),
+       (DEFAULT, 'Собачье сердце', 1925, 150, 1),
+       (DEFAULT, 'Мертвые души', 1842, 220, 2),
+       (DEFAULT, 'Ревизор', 1836, 180, 2),
+       (DEFAULT, 'Вечера на хуторе близ Диканьки', 1831, 100, 2),
+       (DEFAULT, 'Граф Монте-Кристо', 1844, 600, 3),
+       (DEFAULT, 'Три мушкетера', 1844, 550, 3),
+       (DEFAULT, 'Евгений Онегин', 1825, 200, 4),
+       (DEFAULT, 'Повести Белкина', 1831, 300, 4),
+       (DEFAULT, 'Дубровский', 1833, 400, 4),
+       (DEFAULT, 'Палата № 6', 1892, 180, 5),
+       (DEFAULT, 'Драма на охоте', 1884, 190, 5);
+```
+
